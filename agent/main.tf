@@ -105,6 +105,12 @@ resource "aws_instance" "webserver" {
   }
 
   provisioner "remote-exec" {
+    inline = [
+      "sudo rm /var/www/html/index.html"
+    ]
+  }
+
+  provisioner "remote-exec" {
     connection {
       host        = data.terraform_remote_state.pe.outputs.puppetmaster
       type        = "ssh"
