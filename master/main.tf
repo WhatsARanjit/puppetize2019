@@ -23,10 +23,10 @@ resource "aws_security_group" "allow_ssh" {
   name = "allow_ssh"
   description = "Allow ssh connections on port 22"
   ingress {
-      from_port   = 22
-      to_port     = 22
-      protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
@@ -34,16 +34,16 @@ resource "aws_security_group" "allow_https" {
   name = "allow_https"
   description = "Allow ssh connections on port 443 and 8140"
   ingress {
-      from_port   = 443
-      to_port     = 443
-      protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
-      from_port   = 8140
-      to_port     = 8140
-      protocol    = "tcp"
-      cidr_blocks = ["172.0.0.0/6"]
+    from_port   = 8140
+    to_port     = 8140
+    protocol    = "tcp"
+    cidr_blocks = ["172.0.0.0/6"]
   }
 }
 
@@ -88,6 +88,12 @@ resource "aws_instance" "pe-ubuntu" {
   provisioner "file" {
     content     = "${data.template_file.peconf.rendered}"
     destination = "/tmp/pe.conf"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sed -i 's/PUBLICDNS/${self.public_dns}/' /tmp/pe.conf"
+    ]
   }
 
   provisioner "remote-exec" {

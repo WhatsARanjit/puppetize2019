@@ -27,6 +27,7 @@ sudo curl -k \
   "https://${SERVER}:4433/rbac-api/v1/users"
 
 # Fetch token for deploy user
+mkdir -p ~/.puppetlabs
 sudo curl -k \
   -H 'Content-Type: application/json' \
   --tlsv1 \

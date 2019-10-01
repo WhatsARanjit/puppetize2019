@@ -2,6 +2,10 @@ output "puppetmaster" {
   value = "${aws_instance.pe-ubuntu.public_dns}"
 }
 
+output "puppetmaster-internal" {
+  value = "${aws_instance.pe-ubuntu.private_dns}"
+}
+
 output "key_name" {
   value = "${aws_key_pair.generated_key.key_name}"
 }
