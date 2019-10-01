@@ -66,7 +66,7 @@ resource "aws_instance" "dbserver" {
     }
     when   = "destroy"
     inline = [
-      "sudo puppet node purge ${self.public_dns}"
+      "sudo puppet node purge ${self.private_dns}"
     ]
   }
 }
@@ -113,7 +113,7 @@ resource "aws_instance" "webserver" {
     }
     when   = "destroy"
     inline = [
-      "sudo puppet node purge ${self.public_dns}"
+      "sudo puppet node purge ${self.private_dns}"
     ]
   }
 }
