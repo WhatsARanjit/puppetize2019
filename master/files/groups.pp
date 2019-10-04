@@ -18,8 +18,7 @@ node_group { 'Web servers':
     'wordpress' => {
       'db_password' => 'wordpress',
       'version'     => '5.2.3'
-  }
-    },
+    }
   },
   rule => ['and',
     ['=',
